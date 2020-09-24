@@ -16,7 +16,7 @@ Debes seguir el C√≥digo de honor del ingeniero de sistemas para defender el est√
 
 Clonamos nuestro repositorio con el siguiente comando: 
 ~~~
-git clone https://github.com/DanielAlfonso17/IETI-LAB3.git
+git clone https://github.com/DanielAlfonso17/IETI-LAB5.git
 ~~~
 
 Entramos a nuestra carpeta del proyecto y ejecutamos para instalar todas las dependencias del proyecto
