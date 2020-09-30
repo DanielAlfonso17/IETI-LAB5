@@ -6,7 +6,7 @@ import Login from './components/Login';
 import ResponsiveDrawer from './components/Drawer';
 import OutlinedCard from './components/Card';
 import NewTask from './components/NewTask';
-
+import UserList from './components/UserList'
 
 const LoginView = () => (
   <Login />
@@ -47,6 +47,7 @@ class App extends React.Component{
     this.state = {
       isLogginIn: false,
       task: cardList,
+      userList: []
     }
     this.handleTask = this.handleTask.bind(this);
   }
@@ -62,6 +63,19 @@ class App extends React.Component{
     this.setState({
       task: list
     })
+  }
+
+  componentDidMount(){
+    fetch('http://ietilab.southcentralus.azurecontainer.io:8080/user')
+            .then(response => response.json())
+            .then(data => {
+                let userList = [];
+                data.forEach((user) => {
+                  userList.push(user);
+                });
+
+                this.setState({userList: userList});
+            });
   }
 
   handleProfile(profile){
@@ -83,16 +97,16 @@ class App extends React.Component{
 
                   {this.state.isLogginIn && (
                     <div>
+                      <UserList list={this.state.userList}/>
                       <NewTask newTask={this.handleTask}/>
                       <ResponsiveDrawer profileUser={this.handleProfile}/>
                       <OutlinedCard items={this.state.task}/>
-
                     </div>)}
                   <ul>
                       {!this.state.isLogginIn && (
                         <div>
                           <li><Link to="/login">Login</Link></li>
-                        
+
                         </div>
                       )}
                   </ul>
